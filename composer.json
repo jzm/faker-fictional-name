@@ -1,0 +1,20 @@
+{
+    "name": "jupicose/faker-fictional-name",
+    "description": "Fictional name generator for fzaninotto/Faker",
+    "require": {
+        "fzaninotto/faker": "^1.8",
+        "php": "^7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jupicose",
+            "email": "jupicose@gmail.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4": {
+    		"FakerFictionalName\\": "src/"
+    	}
+    }
+}
