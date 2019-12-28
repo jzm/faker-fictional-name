@@ -4,15 +4,14 @@ namespace FakerFictionalName\Provider\en_US;
 
 class FictionalName extends \Faker\Provider\Base 
 {
-
-	protected static $cannotBeginWith = array(
+	protected static $cannotBeginWith = [
 		'ng', 'kc', 'cey', 'oi', 'isk', 'ie', 'oe', 
-	);
-	protected static $cannotEndWith = array(
+	];
+	protected static $cannotEndWith = [
 		'h', 'aa', 
-	);
+	];
 
-	protected static $syllables = array(
+	protected static $syllables = [
 		'o', 'li', 'ver', 'ja', 'k', 'char', 'lie', 'ha', 'ry',
 		'ja', 'cob', 'geo', 'no', 'ah', 'al', 'fie', 'os', 'car',
 		'ya', 'mes', 'fre', 'die', 'le', 'o', 'lo', 'gan', 'ar', 
@@ -58,52 +57,51 @@ class FictionalName extends \Faker\Provider\Base
 		'bo', 'nie', 'a', 'ra', 'be', 'la', 'la', 'cey', 'a', 'nie', 
 		'ly', 'la', 'i', 'ris', 'zo', 'e', 'cla', 'ra', 'ma', 'di', 'son',
 		'me', 'gan',  
-	);
+	];
 
+	
+	
 	/**
 	 * A random fictional name.
 	 * @return string
 	 */
-
 	public function fictionalName() 
 	{
-
 		$name = implode(static::randomElements(static::$syllables, static::numberBetween(2, 3), true));
 		$name = $this->checkEndings($name);
 		$name = $this->checkBeginnings($name);
-
 		return ucfirst($name);
 	}
 
+
+	
 	/**
 	 * Verify that endings are allowed.
 	 * @return string
 	 */
-	public function checkEndings($name) {
-
+	public function checkEndings($name) 
+	{
 		foreach (static::$cannotEndWith as $ending) {
 			if (substr($name, -strlen($ending)) == $ending) {
 				$name = $this->checkEndings(substr($name, 0, -strlen($ending)) . static::randomElement(static::$syllables));
 			}			
 		}
-
 		return $name;		
-
 	}
 
+
+	
 	/**
 	 * Verify that beginnings are allowed.
 	 * @return string
 	 */
-	public function checkBeginnings($name) {
-
+	public function checkBeginnings($name) 
+	{
 		foreach (static::$cannotBeginWith as $beginning) {                                                                                                                              
 			if (substr($name, 0, strlen($beginning)) == $beginning) {                                                                                                                      
 				$name = $this->checkBeginnings(static::randomElement(static::$syllables) . substr($name, 0, strlen($beginning)));
 			}                                                                                                                                                                      
 		}                                                                                                                                                                          
-
 		return $name;
-
 	}
 }
